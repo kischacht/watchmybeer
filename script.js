@@ -45,9 +45,6 @@ if (SUPPORTS_MEDIA_DEVICES) {
           track.applyConstraints({
             advanced: [{torch: true}]
           });
-        if (document.getElementsByClassName("switch")[0].src ==='button.png'){
-          document.getElementsByClassName("switch")[0].src='button-dark.png';
-        }
         });
       });
 
@@ -59,3 +56,13 @@ if (SUPPORTS_MEDIA_DEVICES) {
   
   
 }
+
+var btn = document.querySelector('.switch');
+btn.addEventListener('click', function(){
+  track.applyConstraints({
+    advanced: [{torch: true}]
+  });
+ if (document.getElementsByClassName("switch")[0].src ==='button.png'){
+  document.getElementsByClassName("switch")[0].src='button-dark.png';
+}
+});
