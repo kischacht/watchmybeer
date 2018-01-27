@@ -30,6 +30,7 @@ if (SUPPORTS_MEDIA_DEVICES) {
     }).then(function(stream){
       console.log(stream);
       var track = stream.getVideoTracks()[0];
+      console.log(track);
 
       //Create image capture object and get camera capabilities
       var imageCapture = new ImageCapture(track);
@@ -44,6 +45,9 @@ if (SUPPORTS_MEDIA_DEVICES) {
           track.applyConstraints({
             advanced: [{torch: true}]
           });
+        if (document.getElementsByClassName("switch")[0].src ==='button.png'){
+          document.getElementsByClassName("switch")[0].src='button-dark.png';
+        }
         });
       });
 
