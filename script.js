@@ -59,10 +59,9 @@ if (SUPPORTS_MEDIA_DEVICES) {
 
 var btn = document.querySelector('.switch');
 btn.addEventListener('click', function(){
-  track.applyConstraints({
-    advanced: [{torch: true}]
-  });
- if (document.getElementsByClassName("switch")[0].src ==='button.png'){
-  document.getElementsByClassName("switch")[0].src='button-dark.png';
-}
+  if (document.getElementById("watchbtn").src.endsWith('button.png')){
+    document.getElementById("watchbtn").src='button-dark.png';
+    console.log(document.styleSheets[0].cssRules[0]);
+    document.styleSheets[0].cssText = "body:{color:black !important}"; //some css goes here
+  }
 });
