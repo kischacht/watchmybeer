@@ -1,16 +1,23 @@
 //Test browser support
-const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+var SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+var imageCapture;
 
+console.log(SUPPORTS_MEDIA_DEVICES);
 if (SUPPORTS_MEDIA_DEVICES) {
   //Get the environment camera (usually the second one)
-  navigator.mediaDevices.enumerateDevices().then(devices => {
+  navigator.mediaDevices.enumerateDevices().then(function(devices){
   
-    const cameras = devices.filter((device) => device.kind === 'videoinput');
-
+    //get list of cameras
+    const cameras = devices.filter(function(device){return device.kind === 'videoinput'} );
+    
+    //stop if no cameras
     if (cameras.length === 0) {
       throw 'No camera found on this device.';
     }
+
+    //get next to last camera
     const camera = cameras[cameras.length - 1];
+    console.log(camera);
 
     // Create stream and get video track
     navigator.mediaDevices.getUserMedia({
@@ -20,24 +27,26 @@ if (SUPPORTS_MEDIA_DEVICES) {
         height: {ideal: 1080},
         width: {ideal: 1920}
       }
-    }).then(stream => {
-      const track = stream.getVideoTracks()[0];
+    }).then(function(stream){
+      var track = stream.getVideoTracks()[0];
 
       //Create image capture object and get camera capabilities
-      const imageCapture = new ImageCapture(track)
-      const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
+      var imageCapture = new ImageCapture(track);
+      var photoCapabilities = imageCapture.getPhotoCapabilities().then(function(){
 
         //todo: check if camera has a torch
 
         //let there be light!
-        const btn = document.querySelector('.switch');
+        var btn = document.querySelector('.switch');
         btn.addEventListener('click', function(){
           track.applyConstraints({
             advanced: [{torch: true}]
           });
         });
       });
+
     });
+    
   });
   
   //The light will be on as long the track exists
