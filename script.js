@@ -28,10 +28,12 @@ if (SUPPORTS_MEDIA_DEVICES) {
         width: {ideal: 1920}
       }
     }).then(function(stream){
+      console.log(stream);
       var track = stream.getVideoTracks()[0];
 
       //Create image capture object and get camera capabilities
       var imageCapture = new ImageCapture(track);
+      console.log(imageCapture);
       var photoCapabilities = imageCapture.getPhotoCapabilities().then(function(){
 
         //todo: check if camera has a torch
@@ -46,7 +48,7 @@ if (SUPPORTS_MEDIA_DEVICES) {
       });
 
     });
-    
+
   });
   
   //The light will be on as long the track exists
